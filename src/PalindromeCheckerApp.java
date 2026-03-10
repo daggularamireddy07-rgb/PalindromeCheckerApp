@@ -1,21 +1,27 @@
+import java.util.*;
+
 public class PalindromeCheckerApp {
 
     public static void main(String[] args) {
 
                 String word = "madam";
-                char[] chars = word.toCharArray();
 
-                int start = 0;
-                int end = chars.length - 1;
+                Queue<Character> queue = new LinkedList<>();
+                Stack<Character> stack = new Stack<>();
+
+                for (int i = 0; i < word.length(); i++) {
+                    char ch = word.charAt(i);
+                    queue.add(ch);
+                    stack.push(ch);
+                }
+
                 boolean isPalindrome = true;
 
-                while (start < end) {
-                    if (chars[start] != chars[end]) {
+                for (int i = 0; i < word.length(); i++) {
+                    if (queue.remove() != stack.pop()) {
                         isPalindrome = false;
                         break;
                     }
-                    start++;
-                    end--;
                 }
 
                 if (isPalindrome) {
@@ -23,7 +29,5 @@ public class PalindromeCheckerApp {
                 } else {
                     System.out.println(word + " is not a Palindrome");
                 }
-
             }
         }
-
