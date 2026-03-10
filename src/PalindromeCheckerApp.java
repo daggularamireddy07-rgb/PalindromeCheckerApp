@@ -1,33 +1,30 @@
-import java.util.*;
+import java.util.Deque;
+import java.util.ArrayDeque;
 
 public class PalindromeCheckerApp {
 
     public static void main(String[] args) {
 
-                String word = "madam";
+        String word = "madam";
+        Deque<Character> deque = new ArrayDeque<>();
 
-                Queue<Character> queue = new LinkedList<>();
-                Stack<Character> stack = new Stack<>();
+        for (int i = 0; i < word.length(); i++) {
+            deque.addLast(word.charAt(i));
+        }
 
-                for (int i = 0; i < word.length(); i++) {
-                    char ch = word.charAt(i);
-                    queue.add(ch);
-                    stack.push(ch);
-                }
+        boolean isPalindrome = true;
 
-                boolean isPalindrome = true;
-
-                for (int i = 0; i < word.length(); i++) {
-                    if (queue.remove() != stack.pop()) {
-                        isPalindrome = false;
-                        break;
-                    }
-                }
-
-                if (isPalindrome) {
-                    System.out.println(word + " is a Palindrome");
-                } else {
-                    System.out.println(word + " is not a Palindrome");
-                }
+        while (deque.size() > 1) {
+            if (deque.removeFirst() != deque.removeLast()) {
+                isPalindrome = false;
+                break;
             }
         }
+
+        if (isPalindrome) {
+            System.out.println(word + " is a Palindrome");
+        } else {
+            System.out.println(word + " is not a Palindrome");
+        }
+    }
+}
